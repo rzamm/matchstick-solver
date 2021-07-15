@@ -1,4 +1,4 @@
-# SolveMatches
+# Matchstick Puzzle Solver
 
 Can you move 8 matches from this layout and have the matches form 5 squares?<br>
 <img src="/docs/img/1.png" alt="Challenge" width="400" height="400">
