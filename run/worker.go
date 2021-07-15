@@ -1,6 +1,9 @@
 package run
 
-const goroutines = 10_000
+import (
+	"runtime"
+	"sync"
+)
 
 type taskParams struct {
 	f               FieldI
@@ -18,26 +21,26 @@ type taskReturn struct {
 func Workers(task func(*taskParams), output chan *taskReturn) chan *taskParams {
 	// create channels
 	inputs := make(chan *taskParams)
-	done := make(chan bool)
+	goRoutines := runtime.NumCPU()
 
 	// Start launching goroutines
 	// Each goroutine waits for inputs on the input channel
 	// When one arrives, run the task on that input
 	// It's up to the task to return any results to the output channel
 	// When the input channel is closed, send true to the done channel indicating all tasks are done
-	for i := 0; i < goroutines; i++ {
+	wg := sync.WaitGroup{}
+	wg.Add(goRoutines)
+	for i := 0; i < goRoutines; i++ {
 		go func() {
 			for input := range inputs {
 				task(input)
 			}
-			done <- true
+			wg.Done()
 		}()
 	}
 	// this goroutine waits until all tasks are done, then closes the output channel
 	go func() {
-		for i := 0; i < goroutines; i++ {
-			<-done
-		}
+		wg.Wait()
 		close(output)
 	}()
 
