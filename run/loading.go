@@ -1,6 +1,6 @@
 package run
 
-import "SolveMatches/src/rz.github.com/field"
+import "github.com/rzamm/matchstick-solver/field"
 
 // GameType represents the game type.
 type GameType int

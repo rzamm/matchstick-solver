@@ -9,9 +9,9 @@ import (
 	"golang.org/x/text/message"
 	"gonum.org/v1/gonum/stat/combin"
 
-	"SolveMatches/src/rz.github.com/display"
-	"SolveMatches/src/rz.github.com/ec"
-	"SolveMatches/src/rz.github.com/field"
+	"github.com/rzamm/matchstick-solver/display"
+	"github.com/rzamm/matchstick-solver/ec"
+	"github.com/rzamm/matchstick-solver/field"
 )
 
 type (

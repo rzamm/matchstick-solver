@@ -1,4 +1,4 @@
-module SolveMatches
+module github.com/rzamm/matchstick-solver
 
 go 1.14
 

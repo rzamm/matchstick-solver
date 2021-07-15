@@ -2,8 +2,8 @@
 package display
 
 import (
-	"SolveMatches/src/rz.github.com/field"
-	"SolveMatches/src/rz.github.com/logg"
+	"github.com/rzamm/matchstick-solver/field"
+	"github.com/rzamm/matchstick-solver/logg"
 )
 
 const bot = '_'

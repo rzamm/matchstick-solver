@@ -1,9 +1,9 @@
 package main
 
 import (
-	"SolveMatches/src/rz.github.com/display"
-	"SolveMatches/src/rz.github.com/logg"
-	"SolveMatches/src/rz.github.com/run"
+	"github.com/rzamm/matchstick-solver/display"
+	"github.com/rzamm/matchstick-solver/logg"
+	"github.com/rzamm/matchstick-solver/run"
 )
 
 func main() {

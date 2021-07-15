@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"SolveMatches/src/rz.github.com/display"
-	"SolveMatches/src/rz.github.com/logg"
+	"github.com/rzamm/matchstick-solver/display"
+	"github.com/rzamm/matchstick-solver/logg"
 )
 
 func Test_LvlTestMultiSol(t *testing.T) {
