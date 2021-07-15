@@ -22,14 +22,6 @@ type Level struct {
 	ShapesRequired int
 }
 
-// LvlTestMultipleSolutions testing level that runs quickly and has multiple solutions.
-func LvlTestMultipleSolutions(bit bool) *Level {
-	var matches []*field.MatchPosition
-	matches = append(matches, placeSquare(0, 0)...)
-
-	return returnLevel(bit, moveGame, 4, 1, 4, 4, matches)
-}
-
 // Lvl6 represents level 6.
 //noinspection GoUnnecessarilyExportedIdentifiers
 func Lvl6(bit bool) *Level {

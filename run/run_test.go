@@ -7,11 +7,20 @@ import (
 	"github.com/stretchr/testify/assert"
 
 	"github.com/rzamm/matchstick-solver/display"
+	"github.com/rzamm/matchstick-solver/field"
 	"github.com/rzamm/matchstick-solver/logg"
 )
 
+// testing level that runs quickly and has multiple solutions
+func multipleSolutionsLevel(bit bool) *Level {
+	var matches []*field.MatchPosition
+	matches = append(matches, placeSquare(0, 0)...)
+
+	return returnLevel(bit, moveGame, 4, 1, 4, 4, matches)
+}
+
 func Test_LvlTestMultiSol(t *testing.T) {
-	doRun(t, LvlTestMultipleSolutions, true, false)
+	doRun(t, multipleSolutionsLevel, true, false)
 }
 
 func Test_Lvl6(t *testing.T) {
