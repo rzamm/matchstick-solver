@@ -2,36 +2,36 @@ package run
 
 import "github.com/rzamm/matchstick-solver/field"
 
-// GameType represents the game type.
-type GameType int
+// gameType represents the game type.
+type gameType int
 
 const (
-	// RemoveGame only remove matches.
-	RemoveGame GameType = iota
-	// MoveGame remove then place matches.
-	MoveGame
+	// removeGame only remove matches.
+	removeGame gameType = iota
+	// moveGame remove then place matches.
+	moveGame
 )
 
 // A Level describes an initial state, a game type, the number of removable/movable matches
 // and the number of shapes required.
+//noinspection GoUnnecessarilyExportedIdentifiers
 type Level struct {
 	Field          FieldI
-	GameType       GameType
+	GameType       gameType
 	Movable        int
 	ShapesRequired int
 }
 
 // LvlTestMultipleSolutions testing level that runs quickly and has multiple solutions.
-//goland:noinspection GoUnusedExportedFunction
 func LvlTestMultipleSolutions(bit bool) *Level {
 	var matches []*field.MatchPosition
 	matches = append(matches, placeSquare(0, 0)...)
 
-	return returnLevel(bit, MoveGame, 4, 1, 4, 4, matches)
+	return returnLevel(bit, moveGame, 4, 1, 4, 4, matches)
 }
 
 // Lvl6 represents level 6.
-//goland:noinspection GoUnusedExportedFunction
+//noinspection GoUnnecessarilyExportedIdentifiers
 func Lvl6(bit bool) *Level {
 	var matches []*field.MatchPosition
 	matches = append(matches, placeSquare(1, 1)...)
@@ -41,11 +41,11 @@ func Lvl6(bit bool) *Level {
 	matches = append(matches, placeSquare(2, 2)...)
 	matches = append(matches, placeSquare(3, 2)...)
 
-	return returnLevel(bit, RemoveGame, 6, 3, 4, 5, matches)
+	return returnLevel(bit, removeGame, 6, 3, 4, 5, matches)
 }
 
 // Lvl16 represents level 16.
-//goland:noinspection GoUnusedExportedFunction
+//noinspection GoUnnecessarilyExportedIdentifiers
 func Lvl16(bit bool) *Level {
 	matches := []*field.MatchPosition{
 		{0, 0, field.Rgt},
@@ -67,11 +67,11 @@ func Lvl16(bit bool) *Level {
 	matches = append(matches, placeSquare(2, 1)...)
 	matches = append(matches, placeSquare(2, 2)...)
 
-	return returnLevel(bit, MoveGame, 8, 5, 4, 5, matches)
+	return returnLevel(bit, moveGame, 8, 5, 4, 5, matches)
 }
 
 // Lvl16Test a faster version of level 16 due to less movable matches.
-//goland:noinspection GoUnusedExportedFunction
+//noinspection GoUnnecessarilyExportedIdentifiers
 func Lvl16Test(bit bool) *Level {
 	matches := []*field.MatchPosition{
 		{0, 0, field.Rgt},
@@ -94,11 +94,11 @@ func Lvl16Test(bit bool) *Level {
 	matches = append(matches, placeSquare(2, 1)...)
 	matches = append(matches, placeSquare(2, 2)...)
 
-	return returnLevel(bit, MoveGame, 4, 5, 4, 5, matches)
+	return returnLevel(bit, moveGame, 4, 5, 4, 5, matches)
 }
 
 // Lvl19 represents level 19.
-//goland:noinspection GoUnusedExportedFunction
+//noinspection GoUnnecessarilyExportedIdentifiers
 func Lvl19(bit bool) *Level {
 	matches := []*field.MatchPosition{
 		{0, 0, field.Bot},
@@ -119,17 +119,17 @@ func Lvl19(bit bool) *Level {
 	matches = append(matches, placeSquare(2, 2)...)
 	matches = append(matches, placeSquare(2, 3)...)
 
-	return returnLevel(bit, MoveGame, 6, 6, 4, 5, matches)
+	return returnLevel(bit, moveGame, 6, 6, 4, 5, matches)
 }
 
-func returnLevel(bit bool, gameType GameType, movable, shapesRequired, width, height int,
+func returnLevel(bit bool, gameType gameType, movable, shapesRequired, width, height int,
 	matches []*field.MatchPosition) *Level {
 
 	var removableMatches int
 	switch gameType {
-	case RemoveGame:
+	case removeGame:
 		removableMatches = movable
-	case MoveGame:
+	case moveGame:
 		removableMatches = 0
 	default:
 		panic("Unknown Game Type")

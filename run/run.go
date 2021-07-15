@@ -14,6 +14,7 @@ import (
 	"github.com/rzamm/matchstick-solver/field"
 )
 
+//noinspection GoUnnecessarilyExportedIdentifiers
 type (
 	// FieldI represents a field.
 	FieldI interface {
@@ -24,7 +25,7 @@ type (
 		CheckSquares(requiredShapes int) bool
 		Copy(bool) field.Copyable
 	}
-	// Run is a collection of information needed to find a solution to a level
+	// Run is a collection of information needed to find a solution to a Level
 	// as well as metadata.
 	Run struct {
 		field             FieldI
@@ -35,7 +36,7 @@ type (
 		placeCombsTotal   int
 		totalCombinations int
 		shapesRequired    int
-		gameType          GameType
+		gameType          gameType
 		printer           *message.Printer
 	}
 )
@@ -49,10 +50,10 @@ func NewRun(lvl *Level) *Run {
 	var placeCombs int
 	var totalCombinations int
 	switch lvl.GameType {
-	case RemoveGame:
+	case removeGame:
 		placeCombs = 0
 		totalCombinations = removeCombs
-	case MoveGame:
+	case moveGame:
 		placeCombs = combin.Binomial(sCount, movable)
 		totalCombinations = removeCombs * placeCombs
 	}
@@ -74,12 +75,12 @@ func NewRun(lvl *Level) *Run {
 // PrintStats prints statistics to the log file.
 func (r *Run) PrintStats() {
 	fmt.Println("matches", r.matchCount)
-	if r.gameType == MoveGame {
+	if r.gameType == moveGame {
 		fmt.Println("spaces", r.spaceCount)
 	}
 	fmt.Println("movable", r.movable)
 	r.printer.Printf("remove combs %d\n", r.removeCombsTotal)
-	if r.gameType == MoveGame {
+	if r.gameType == moveGame {
 		r.printer.Printf("place combs %d\n", r.placeCombsTotal)
 	}
 	r.printer.Printf("total %d\n\n", r.totalCombinations)
@@ -90,9 +91,9 @@ func (r *Run) PrintStats() {
 // If oneSolution is set, SolveGame will return only the first solution that it finds.
 func (r *Run) SolveGame(oneSolution bool) []FieldI {
 	switch r.gameType {
-	case RemoveGame:
+	case removeGame:
 		return r.RemoveGame(oneSolution)
-	case MoveGame:
+	case moveGame:
 		return r.MoveGame(oneSolution)
 	default:
 		panic("Unknown Game Type")
@@ -189,7 +190,7 @@ func (r *Run) MoveGame(oneSolution bool) []FieldI {
 			}
 			workers <- &params
 
-			if removeCombIndex%50 == 0 {
+			if removeCombIndex%100 == 0 {
 				checks++
 				average := time.Duration(int64(time.Now().Sub(startTime)) / checks)
 				r.printer.Printf("%d out of %d average: %v\n",
