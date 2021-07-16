@@ -6,12 +6,12 @@ import (
 	"time"
 
 	"golang.org/x/text/language"
-	"golang.org/x/text/message"
 	"gonum.org/v1/gonum/stat/combin"
 
 	"github.com/rzamm/matchstick-solver/display"
 	"github.com/rzamm/matchstick-solver/ec"
 	"github.com/rzamm/matchstick-solver/field"
+	"github.com/rzamm/matchstick-solver/io"
 )
 
 //noinspection GoUnnecessarilyExportedIdentifiers
@@ -37,7 +37,7 @@ type (
 		totalCombinations int
 		shapesRequired    int
 		gameType          gameType
-		printer           *message.Printer
+		printer           *io.Printer
 	}
 )
 
@@ -68,7 +68,7 @@ func NewRun(lvl *Level) *Run {
 		shapesRequired:    lvl.ShapesRequired,
 		gameType:          lvl.GameType,
 		totalCombinations: totalCombinations,
-		printer:           message.NewPrinter(language.English),
+		printer:           io.NewPrinter(language.English),
 	}
 }
 
@@ -79,11 +79,11 @@ func (r *Run) PrintStats() {
 		fmt.Println("spaces", r.spaceCount)
 	}
 	fmt.Println("movable", r.movable)
-	r.printer.Printf("remove combs %d\n", r.removeCombsTotal)
+	r.printer.MustPrintf("remove combs %d\n", r.removeCombsTotal)
 	if r.gameType == moveGame {
-		r.printer.Printf("place combs %d\n", r.placeCombsTotal)
+		r.printer.MustPrintf("place combs %d\n", r.placeCombsTotal)
 	}
-	r.printer.Printf("total %d\n\n", r.totalCombinations)
+	r.printer.MustPrintf("total %d\n\n", r.totalCombinations)
 }
 
 // SolveGame runs the Run and returns solutions.
@@ -193,7 +193,7 @@ func (r *Run) MoveGame(oneSolution bool) []FieldI {
 			if removeCombIndex%100 == 0 {
 				checks++
 				average := time.Duration(int64(time.Now().Sub(startTime)) / checks)
-				r.printer.Printf("%d out of %d average: %v\n",
+				_, _ = r.printer.Printf("%d out of %d average: %v\n",
 					removeCombIndex, r.removeCombsTotal, average)
 			}
 			// put the matches we removed back
