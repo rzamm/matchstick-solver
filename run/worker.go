@@ -27,7 +27,6 @@ func Workers(task func(*taskParams), output chan *taskReturn) chan *taskParams {
 	// Each goroutine waits for inputs on the input channel
 	// When one arrives, run the task on that input
 	// It's up to the task to return any results to the output channel
-	// When the input channel is closed, send true to the done channel indicating all tasks are done
 	wg := sync.WaitGroup{}
 	wg.Add(goRoutines)
 	for i := 0; i < goRoutines; i++ {
