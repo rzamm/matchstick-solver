@@ -1,7 +1,7 @@
 # Matchstick Puzzle Solver
 
 Can you move 8 matches from this layout and have the matches form 5 squares?<br>
-<img src="/docs/img/1.png" alt="Challenge" width="400" height="400">
+<img src="docs/img/1.png" alt="Challenge" width="400" height="400">
 
 Try it yourself with some matches at home!
 
@@ -11,7 +11,7 @@ Try it yourself with some matches at home!
   <p>
     Remove 4 matches from the middle and 4 from the sides.<br>
     The layout should look like this:<br>
-    <img src="/docs/img/2.png" alt="Hint" width="300" height="300">
+    <img src="docs/img/2.png" alt="Hint" width="300" height="300">
   </p>
 </details>
 
@@ -24,4 +24,4 @@ To use this tool, simply build and run this on your machine.
 
 For anyone interested, here is another challenge:
 Move 6 matches and get 6 squares.<br>
-<img src="/docs/img/1.png" alt="Next Challenge" width="400" height="400">
+<img src="docs/img/1.png" alt="Next Challenge" width="400" height="400">
